@@ -1,4 +1,4 @@
-apiVersion: v1     #必选，版本号，例如v1
+apiVersion: apps/v1     #必选，版本号，例如v1
 kind: Pod       #必选，指定创建资源的角色/类型  
 metadata:        #必选，资源的元数据/属性 
   name: string       #必选，资源的名字，在同一个namespace中必须唯一  
@@ -6,7 +6,7 @@ metadata:        #必选，资源的元数据/属性
   labels:      #自定义标签,使这个标签在service网络中备案，以便被获知
     - name: string   #自定义标签名字
   annotations:       #设置自定义注解列表  
-    - name: string   #设置自定义注解名字  
+    - name: "string"  #设置自定义注解名字  
 spec:         #必选，设置该资源的详细定义
   containers:    #必选，Pod中容器列表
   - name: string     #必选，容器名称
@@ -47,23 +47,23 @@ spec:         #必选，设置该资源的详细定义
           value: string
       tcpSocket:     #对Pod内个容器健康检查方式设置为tcpSocket方式
          port: number
-       initialDelaySeconds: 0  #容器启动完成后首次探测的时间，单位为秒
-       timeoutSeconds: 0   #对容器健康检查探测等待响应的超时时间，单位秒，默认1秒
-       periodSeconds: 0    #对容器监控检查的定期探测时间设置，单位秒，默认10秒一次
-       successThreshold: 0
-       failureThreshold: 0
-       securityContext:
+      initialDelaySeconds: 0   #容器启动完成后首次探测的时间，单位为秒
+      timeoutSeconds: 0    #对容器健康检查探测等待响应的超时时间，单位秒，默认1秒
+      periodSeconds: 0     #对容器监控检查的定期探测时间设置，单位秒，默认10秒一次
+      successThreshold: 0
+      failureThreshold: 0
+      securityContext:
          privileged:false
     restartPolicy: [Always | Never | OnFailure]#Pod的重启策略，Always表示一旦不管以何种方式终止运行，kubelet都将重启，OnFailure表示只有Pod以非0退出码退出才重启，Nerver表示不再重启该Pod
     nodeSelector: obeject  #设置NodeSelector表示将该Pod调度到包含这个label的node上，以key：value的格式指定
     imagePullSecrets:    #Pull镜像时使用的secret名称，以key：secretkey格式指定
     - name: string
-    hostNetwork:false      #是否使用主机网络模式，默认为false，如果设置为true，表示使用宿主机网络
+    hostNetwork: false      #是否使用主机网络模式，默认为false，如果设置为true，表示使用宿主机网络
     volumes:       #在该pod上定义共享存储卷列表
     - name: string     #共享存储卷名称 （volumes类型有很多种）
       emptyDir: {}     #类型为emtyDir的存储卷，与Pod同生命周期的一个临时目录。为空值
       hostPath: string     #类型为hostPath的存储卷，表示挂载Pod所在宿主机的目录
-        path: string     #Pod所在宿主机的目录，将被用于同期中mount的目录
+      path: /root/data     #Pod所在宿主机的目录，将被用于同期中mount的目录
       secret:      #类型为secret的存储卷，挂载集群与定义的secre对象到容器内部
         scretname: string  
         items:     
