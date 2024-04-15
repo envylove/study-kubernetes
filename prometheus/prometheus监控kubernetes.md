@@ -111,7 +111,7 @@ prometheus      NodePort    10.108.250.141   <none>        9090:30090/TCP   15s
 
 至此，我们可以通过IP地址和端口30090访问到Prometheus的服务。
 
-![alter](./PixPin_2024-04-15_17-00-26.png)  
+![alter](./images/PixPin_2024-04-15_17-00-26.png)  
 
 ## Kubernetes下的服务发现  
 
@@ -289,10 +289,10 @@ deployment.apps/prometheus created
 
 Prometheus使用新的配置文件重建之后，打开Prometheus UI，通过Service Discovery页面可以查看到当前Prometheus通过Kubernetes发现的所有资源对象了：  
 
-![alter](./PixPin_2024-04-15_17-26-08.png)  
+![alter](./images/PixPin_2024-04-15_17-26-08.png)  
 目前为止，我们已经能够通过Prometheus自动发现Kubernetes集群中的各类资源以及其基本信息。不过，如果现在查看Promtheus的Target状态页面，结果可能会让人不太满意：
 
-![alter](./PixPin_2024-04-15_17-26-49.png)  
+![alter](./images/PixPin_2024-04-15_17-26-49.png)  
   
 虽然Prometheus能够自动发现所有的资源对象，并且将其作为Target对象进行数据采集。 但并不是所有的资源对象都是支持Promethues的，并且不同类型资源对象的采集方式可能是不同的。因此，在实际的操作中，我们需要有明确的监控目标，并且针对不同类型的监控目标设置不同的数据采集方式。
 
